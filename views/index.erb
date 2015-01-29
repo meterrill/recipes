@@ -1,1 +1,16 @@
-Hello
+<h1>Recipe Book!</h1>
+<form action="/new_recipe" method="post">
+  <label for="recipe_name">Please Add a Recipe!</label>
+  <input type="text" name="recipe_name" placeholder="Recipe Name!">
+  <button type="submit">Add Recipe!</button>
+</form>
+
+<ul>
+  <% if @recipes.any?() %>
+    <% @recipes.each() do |recipe| %>
+      <li><a href="/recipe/<%= recipe.id() %>"><%= recipe.name() %></a></li>
+    <% end %>
+  <% else %>
+    <p>No recipes yet!</p>
+  <% end %>
+</ul>

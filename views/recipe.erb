@@ -1,0 +1,13 @@
+Update <%= @recipe.name() %> Recipe
+
+<form action="/recipe/<%= @recipe.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="update_recipe_name">Update Your Recipe Here!</label>
+  <input type="text" name="update_recipe_name" placeholder = "New Recipe Name!">
+  <button type="submit">Update Name!</button>
+</form>
+
+<form action="/recipe/<%= @recipe.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete Recipe!</button>
+</form>
