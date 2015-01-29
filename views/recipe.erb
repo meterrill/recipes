@@ -1,13 +1,38 @@
-Update <%= @recipe.name() %> Recipe
+<h2>Update <%= @recipe.name() %> Recipe</h2>
 
 <form action="/recipe/<%= @recipe.id %>" method="post">
   <input type="hidden" name="_method" value="patch">
-  <label for="update_recipe_name">Update Your Recipe Here!</label>
+  <label for="update_recipe_name">Update Your Recipe Name!</label>
   <input type="text" name="update_recipe_name" placeholder = "New Recipe Name!">
-  <button type="submit">Update Name!</button>
+  <button class="btn btn-inverse" type="submit">Update Name!</button>
 </form>
+
+<h4>Ingredients</h4>
+<form action="/recipe/<%= @recipe.id %>" method="post">
+  <input type="text" name="amount" placeholder="Amount of Ingredient!">
+  <input type="text" name="specific_ingredient" placeholder = "New Ingredient!">
+  <button class="btn btn-inverse" type="submit">Add Ingredient</button>
+</form>
+
+<ul>
+  <% if @recipe.ingredients.any?() %>
+    <% @recipe.ingredients.each() do |ingredient| %>
+      <li> <a href="#"><%= ingredient.amount %> - <%= ingredient.name %></a></li>
+    <% end %>
+  <% else %>
+    <p>No ingredients yet!</p>
+  <% end %>
+</ul>
+
+<h4>Instructions</h4>
+<form action="/recipe/<%= @recipe.id %>/instructions" method="post">
+  <input type="text" name="instructions" placeholder="Instructions!!!">
+  <button class="btn btn-inverse" type="submit">Add Instructions!</button>
+</form>
+
+<p> <%= @recipe.instructions %></p>
 
 <form action="/recipe/<%= @recipe.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
-  <button type="submit">Delete Recipe!</button>
+  <button class="btn btn-danger" type="submit">Delete Recipe!</button>
 </form>

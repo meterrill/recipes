@@ -16,6 +16,7 @@ end
 
 get ("/recipe/:id") do
   @recipe = Recipe.find(params.fetch("id").to_i())
+  @ingredients = Ingredient.all()
   erb(:recipe)
 end
 
@@ -24,6 +25,7 @@ patch("/recipe/:id") do
   @recipe = Recipe.find(params.fetch("id").to_i())
   @recipe.update({:name => name})
   @recipes = Recipe.all()
+  @ingredients = Ingredient.all()
   erb(:recipe)
 end
 
@@ -31,5 +33,24 @@ delete("/recipe/:id") do
   @recipe = Recipe.find(params.fetch("id").to_i())
   @recipe.delete()
   @recipes = Recipe.all()
+  @ingredients = Ingredient.all()
   erb(:index)
+end
+
+post("/recipe/:id") do
+  ingredient = params.fetch("specific_ingredient")
+  amount = params.fetch("amount")
+  id = params.fetch("id")
+  ingredient = Ingredient.create({:name => ingredient, :amount => amount, :recipe_id => id})
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  @ingredients = Ingredient.all()
+  erb(:recipe)
+end
+
+post("/recipe/:id/instructions") do
+  instructions = params.fetch("instructions")
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  @recipe.update({:instructions => instructions})
+  @recipes = Recipe.all()
+  erb(:recipe)
 end
