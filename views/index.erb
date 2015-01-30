@@ -1,16 +1,19 @@
 <h1>Recipe Book!</h1>
-<form action="/new_recipe" method="post">
-  <label for="recipe_name">Please Add a Recipe!</label>
-  <input type="text" name="recipe_name" placeholder="Recipe Name!">
-  <button class="btn btn-success" type="submit">Add Recipe!</button>
+
+<form action="/categories" method="post">
+  <label for="category_name">Enter a category</label>
+  <input type="text" name="category_name" placeholder="something with exclamation points!">
+  <button type="submit">Add category!</button>
 </form>
 
 <ul>
-  <% if @recipes.any?() %>
-    <% @recipes.each() do |recipe| %>
-      <li><a href="/recipe/<%= recipe.id() %>"><%= recipe.name() %></a></li>
-    <% end %>
+<% if @categories.any?() %>
+  <% @categories.each() do |category| %>
+  <li><a href = "/recipe_list/<%= category.id() %>"><%= category.name() %></a></li>
+  <% end %>
   <% else %>
-    <p>No recipes yet!</p>
+  <p>
+    Enter some Categories!  Like Dinner
+  </p>
   <% end %>
 </ul>

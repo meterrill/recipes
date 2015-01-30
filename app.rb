@@ -3,8 +3,29 @@ Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get ("/") do
-    @recipes = Recipe.all()
+  @categories = Category.all()
   erb(:index)
+end
+
+post("/categories") do
+  name = params.fetch("category_name")
+  @category_name = Category.create({:name => name})
+  @categories = Category.all()
+  erb(:index)
+end
+
+get ("/recipe_list") do
+    @recipes = Recipe.all()
+  erb(:recipe_list)
+end
+
+# stuck here
+get ("/recipe_list/:id") do
+  @id = params.fetch("id")
+  @recipe = Recipe.create({:name =>  })
+  @recipe = Recipe.find(category_id)
+  @recipes = Recipe.all()
+  erb(:recipe_list)
 end
 
 post ("/new_recipe") do
